@@ -1,0 +1,17 @@
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.env
+.idea/
+*.log
+node_modules/
+dist/
+*.tsbuildinfo
+frontend/vite.config.js
+frontend/vite.config.d.ts
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+artifacts/
+backend/artifacts/*.joblib
