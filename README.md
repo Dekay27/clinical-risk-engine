@@ -48,7 +48,7 @@ docker compose up --build
 Place the Diabetes 130-US hospitals files at:
 
 ```text
-C:\dev\team-ai\diabetes_130_us_hospitals\
+C:\dev\clinical-risk-engine\diabetes_130_us_hospitals\
 ```
 
 Then run:
