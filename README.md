@@ -1,4 +1,4 @@
-# TEAM-AI Clinical Risk Explainability App
+# SBMI Clinical Risk Explainability App
 
 Production-style prototype for explainable clinical risk assessment, designed as a portfolio project for an MS application to UTHealth Houston SMBI's Research track.
 
