@@ -14,7 +14,7 @@ async def lifespan(app: FastAPI):
 
 
 app = FastAPI(
-    title="TEAM-AI Clinical Risk Explainability API",
+    title="SBMI-AI Clinical Risk Explainability API",
     description=(
         "FastAPI service for explainable 30-day readmission risk assessment. "
         "The current engine exposes a stable production API and can load trained "

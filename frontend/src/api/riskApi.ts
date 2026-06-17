@@ -1,6 +1,7 @@
 import type { ModelMetadata, RiskAssessmentRequest, RiskAssessmentResponse } from "../types/risk";
 
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL ?? "http://localhost:8000";
+const API_BASE_URL =
+  import.meta.env.VITE_API_BASE_URL ?? (import.meta.env.PROD ? "/clinical-risk-engine/api.php" : "http://localhost:8000");
 
 export class RiskApiError extends Error {
   constructor(
@@ -31,8 +32,10 @@ async function parseError(response: Response): Promise<string> {
 
 async function request<T>(path: string, init?: RequestInit): Promise<T> {
   let response: Response;
+  const url = API_BASE_URL.endsWith(".php") ? `${API_BASE_URL}?path=${encodeURIComponent(path)}` : `${API_BASE_URL}${path}`;
+
   try {
-    response = await fetch(`${API_BASE_URL}${path}`, {
+    response = await fetch(url, {
       headers: {
         "Content-Type": "application/json",
         ...init?.headers,

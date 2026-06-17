@@ -12,6 +12,8 @@ from .schemas import (
     ShapContribution,
 )
 
+LATEST_TRAINED_AUC_ROC = 0.6714
+
 
 class ClinicalRiskEngine:
     """Explainable readmission risk engine with a stable API-facing contract.
@@ -34,7 +36,7 @@ class ClinicalRiskEngine:
             ),
             training_dataset="Diabetes 130-US hospitals open de-identified dataset",
             target="30-day hospital readmission",
-            auc_roc=self.model_adapter.metrics.get("auc_roc", 0.742),
+            auc_roc=self.model_adapter.metrics.get("auc_roc", LATEST_TRAINED_AUC_ROC),
             disclaimer=(
                 "Research prototype only. Not intended for diagnosis, treatment, "
                 "or operational clinical decision-making."

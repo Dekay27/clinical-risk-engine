@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { AlertCircle, ServerCrash } from "lucide-react";
 
 import { getMetadata, predictRisk, RiskApiError } from "./api/riskApi";
@@ -26,19 +26,11 @@ function App() {
   const [form, setForm] = useState<RiskAssessmentRequest>(samplePatient);
   const [result, setResult] = useState<RiskAssessmentResponse>();
   const [metadata, setMetadata] = useState<ModelMetadata>();
-  const [whatIfMode, setWhatIfMode] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string>();
   const [backendUnavailable, setBackendUnavailable] = useState(false);
 
   const activeMetadata = result?.metadata ?? metadata;
-
-  const scenarioLabel = useMemo(() => {
-    if (!whatIfMode) {
-      return "EHR-aligned assessment";
-    }
-    return "What-if scenario";
-  }, [whatIfMode]);
 
   useEffect(() => {
     getMetadata()
@@ -84,10 +76,8 @@ function App() {
       <div className="grid min-h-screen lg:grid-cols-[390px_minmax(0,1fr)]">
         <PatientInputPanel
           form={form}
-          whatIfMode={whatIfMode}
           loading={loading}
           onChange={updateForm}
-          onToggleWhatIf={() => setWhatIfMode((enabled) => !enabled)}
           onSubmit={() => void runInference()}
         />
 
@@ -95,7 +85,7 @@ function App() {
           <div className="mb-5 flex flex-wrap items-center justify-between gap-3 border-b border-slate-200 pb-4">
             <div>
               <p className="text-xs font-semibold uppercase tracking-wide text-slate-500">Current context</p>
-              <h2 className="mt-1 text-xl font-semibold text-slate-950">{scenarioLabel}</h2>
+              <h2 className="mt-1 text-xl font-semibold text-slate-950">EHR-aligned assessment</h2>
             </div>
             <div className="rounded border border-slate-200 bg-white px-3 py-2 text-sm text-slate-600 shadow-panel">
               Patient <span className="font-semibold text-slate-900">{form.patient_id || "Unassigned"}</span>

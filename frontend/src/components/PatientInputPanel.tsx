@@ -1,4 +1,4 @@
-import { Activity, RefreshCw, ToggleLeft, ToggleRight } from "lucide-react";
+import { Activity, RefreshCw } from "lucide-react";
 
 import type { DischargeDisposition, Gender, Hba1cCategory, MedicationStatus, RiskAssessmentRequest } from "../types/risk";
 import { FieldLabel } from "./FieldLabel";
@@ -7,10 +7,8 @@ import { SliderField } from "./SliderField";
 
 interface PatientInputPanelProps {
   form: RiskAssessmentRequest;
-  whatIfMode: boolean;
   loading: boolean;
   onChange: <K extends keyof RiskAssessmentRequest>(key: K, value: RiskAssessmentRequest[K]) => void;
-  onToggleWhatIf: () => void;
   onSubmit: () => void;
 }
 
@@ -42,29 +40,15 @@ const dispositionOptions: { value: DischargeDisposition; label: string }[] = [
   { value: "other", label: "Other" },
 ];
 
-export function PatientInputPanel({ form, whatIfMode, loading, onChange, onToggleWhatIf, onSubmit }: PatientInputPanelProps) {
+export function PatientInputPanel({ form, loading, onChange, onSubmit }: PatientInputPanelProps) {
   return (
     <section className="border-r border-slate-200 bg-white">
       <div className="sticky top-0 z-10 border-b border-slate-200 bg-white px-5 py-4">
-        <div className="flex items-start justify-between gap-4">
+        <div>
           <div>
             <p className="text-xs font-semibold uppercase tracking-wide text-blue-700">Physician Inputs</p>
             <h1 className="mt-1 text-xl font-semibold text-slate-900">Clinical Risk Workstation</h1>
           </div>
-          <button
-            type="button"
-            onClick={onToggleWhatIf}
-            className={`inline-flex h-9 shrink-0 items-center gap-2 rounded border px-3 text-sm font-medium transition ${
-              whatIfMode
-                ? "border-blue-600 bg-blue-600 text-white shadow-sm hover:bg-blue-700"
-                : "border-slate-300 bg-white text-slate-600 hover:border-slate-400"
-            }`}
-            aria-pressed={whatIfMode}
-            title={whatIfMode ? "What-if mode active" : "Enable what-if mode"}
-          >
-            {whatIfMode ? <ToggleRight size={18} /> : <ToggleLeft size={18} />}
-            <span>{whatIfMode ? "What-if on" : "What-if"}</span>
-          </button>
         </div>
       </div>
 
